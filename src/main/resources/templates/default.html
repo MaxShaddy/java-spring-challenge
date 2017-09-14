@@ -1,10 +1,124 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Challenge Java / Spring : Users REST backend - description.</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Challenge Java / Spring : Users REST backend -
+	description.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style type="text/css">
+	p {
+		color: blue;
+		font-size: 16px;
+	}
+</style>
 </head>
 <body>
-    <a href="rest/users/list-paginated">Paginated</a>
+
+	<p>Get a paginated list of users, sorted by id, asc. Allows to specify parameters:</p>
+		<br/>
+		<i>Defaults: page=0; size=50</i> 
+		<br/> 
+		<b>page</b> - page number zero based 
+		<br/>
+		<b>size</b> - items per page
+		
+	
+		<br/>
+		Examples
+		<hr/>
+			<ul>
+				<li><a href="rest/users/list-paginated" target="_blank">Pagination - Default</a></li>
+		
+				<li><a href="rest/users/list-paginated?size=5&amp;page=1" target="_blank">Pagination - Page: 1 Size: 5</a></li>
+			</ul>
+		<hr/>
+
+	<p>Filter by any of the listed fields (contains).Parameters: <b>case insensitive</b>. Condition:<b> contain, and</b>.</p>
+		<br/>
+			<i>Defaults: all param is null nothing filtered.</i>
+		<br/> 
+			<b>firstName</b> - string.  
+		<br/>
+			<b>lastName</b> - string.
+		<br/>
+			<b>email</b> - string.
+		<br/>
+			<b>roleName</b> - string. <i>Existing roles: ADMIN, MANAGER, USER, CEO .</i>
+	
+		<br/>
+		Examples
+		<hr/>
+		<ul>
+				<li><a href="rest/users/find-by-spec" target="_blank">Filtering - Default(no filters applied)</a></li>
+		
+				<li><a href="rest/users/find-by-spec?firstName=bo&amp;roleName=MaN" target="_blank">Filtering - firstName: bo roleName: MaN</a></li>
+				
+				<li><a href="rest/users/find-by-spec?firstName=bo&amp;roleName=user" target="_blank">Filtering - firstName: bo roleName: user</a></li>
+		</ul>
+		<hr/>
+		
+	<p>Sort by any of the listed fields, either ascending or descending.Parameters: <b>case insensitive</b>.</p>
+		<br/>
+			<i>Defaults: all param can be null or ommited.</i>
+		<br/> 
+			<b>firstName</b> [ASC|DESC] or [asc|desc]  
+		<br/>
+			<b>lastName</b> [ASC|DESC] or [asc|desc]
+		<br/>
+			<b>email</b> [ASC|DESC] or [asc|desc]
+		
+	
+		<br/>
+		Examples
+		<hr/>
+		<ul>
+				<li><a href="rest/users/sort-by" target="_blank">Sorting - Default(sorted by Id - ASC)</a></li>
+		
+				<li><a href="rest/users/sort-by?firstName=asc&amp;lastName=DESC" target="_blank">Sorting - firstName: asc lastName: DESC</a></li>
+				
+				<li><a href="rest/users/sort-by?firstName=desc&amp;lastName=zzz" target="_blank">Sorting - firstName: desc lastName: zzz (last name not applied as wrong param value).</a></li>
+		</ul>
+		<hr/>	
+		
+		
+	<p>Put all API together.</p>
+		<br/>
+			<i>Filtering params(as on previous example except param name begins with 'f'):</i>
+		<br/> 
+			<b>fFirstName</b> - string.  
+		<br/>
+			<b>fLastName</b> - string.
+		<br/>
+			<b>fEmail</b> - string.
+		<br/>
+			<b>fRoleName</b> - string. <i>Existing roles: ADMIN, MANAGER, USER, CEO .</i>
+		<br/>
+			<i>Sortin params:</i>
+		<br/> 
+			<b>sFirstName</b> [ASC|DESC] or [asc|desc]  
+		<br/>
+			<b>sLastName</b> [ASC|DESC] or [asc|desc]
+		<br/>
+			<b>sEmail</b> [ASC|DESC] or [asc|desc]	
+		<br/>
+		<i>Pagination params: page=0; size=50</i> 
+		<br/> 
+		<b>page</b> - page number zero based 
+		<br/>
+		<b>size</b> - items per page
+		
+						
+	
+	<br/>
+		Examples
+		<hr/>
+		<ul>
+				<li><a href="rest/users/find-sorted-paged" target="_blank">Sorting, Paging, Filtering - Default(not applied)</a></li>
+		
+				<li><a href="rest/users/find-sorted-paged?fFirstName=bob&amp;sLastName=DESC" target="_blank">Filter: fFirstName=bob Sorting - lastName=DESC</a></li>
+				
+				<li><a href="rest/users/find-sorted-paged?fRoleName=user&amp;sLastName=DESC&amp;page=1&amp;size=5" target="_blank">Filter: fRoleName=user Sorting - sLastName=DESC Page: size=5 page=1</a></li>
+		</ul>
+		<hr/>	
+			
 </body>
 </html>

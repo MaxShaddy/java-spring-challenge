@@ -27,7 +27,7 @@ public class ApplicationRestController {
 	
 	@RequestMapping(value = "users/list-paginated", method = RequestMethod.GET)
 	public Page<User>  listPaginatedUsers(@RequestParam(required=false, defaultValue="0", name="page") Integer page,
-								 		  @RequestParam(required=false, defaultValue="5", name="size") Integer size){
+								 		  @RequestParam(required=false, defaultValue="50", name="size") Integer size){
 		return userService.listPageableSortedById(page,size);
 	}
 
@@ -73,7 +73,7 @@ public class ApplicationRestController {
 	@RequestMapping(value = "users/find-sorted-paged", method = RequestMethod.GET)
 	public Page<User> findSortedPaged(
 			@RequestParam(required = false, defaultValue = "0", name = "page") Integer page,
-			@RequestParam(required = false, defaultValue = "5", name = "size") Integer size,
+			@RequestParam(required = false, defaultValue = "50", name = "size") Integer size,
 			@RequestParam(required = false, defaultValue = "", name = "fFirstName") String fFirstName,
 			@RequestParam(required = false, defaultValue = "", name = "fLastName") String fLastName,
 			@RequestParam(required = false, defaultValue = "", name = "fEmail") String fEmail,
