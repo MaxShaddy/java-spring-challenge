@@ -100,19 +100,26 @@ public class UserService {
 	 * @return List<User>
 	 */
 	public List<User> sortBy(String firstName, String  lastName,String  email){
+				Sort sortClause = buildUserSort( firstName,   lastName,  email);
+		if (sortClause != null ) {
+			userRepository.findAll(sortClause);
+			return (List<User>) userRepository.findAll(sortClause); 
+		} else {
+			return (List<User>) userRepository.findAll();
+		}
+		
+	}
+	
+	private Sort buildUserSort(String firstName, String  lastName,String  email) {
 		List<Order> ordersList = new ArrayList<>();
 		appendCheked(ordersList, "firstName", firstName);
 		appendCheked(ordersList, "lastName", lastName);
 		appendCheked(ordersList, "email", email);
 
-		if (ordersList.isEmpty()) {
-			return (List<User>) userRepository.findAll();
-		} else {
-			Sort sortClause = new Sort(ordersList);
-			userRepository.findAll(sortClause);
-			return (List<User>) userRepository.findAll(sortClause); 
-		}
-		
+		if (!ordersList.isEmpty()) {
+			return new Sort(ordersList); 
+		} 
+		return null;
 	}
 	
 	/**  Adds the  new Order instance to provided orderList - if paramsa is OK.
