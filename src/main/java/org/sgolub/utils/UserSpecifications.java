@@ -17,7 +17,7 @@ public class UserSpecifications {
 		return new Specification<User>() {
 		@Override
 		public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-			
+			query.distinct(true);
 			Predicate criteria = cb.conjunction();
 				// Creating and adding simple predicates
 				criteria = cb.and(criteria, cb.like(cb.lower( root.get("firstName") ),  

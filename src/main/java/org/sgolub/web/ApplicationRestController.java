@@ -58,8 +58,8 @@ public class ApplicationRestController {
 		
 		return userService.findBySpec(firstName, lastName, email, roleName);
 	}
-
 	
+	/* SORTING*/
 	@RequestMapping(value = "users/sort-by", method = RequestMethod.GET)
 	public List<User>  sortBy(@RequestParam(required=false, defaultValue="", name="firstName") String firstName,
 			@RequestParam(required=false, defaultValue="", name="lastName") String  lastName,
@@ -69,14 +69,20 @@ public class ApplicationRestController {
 	}
 	
 	
+	/* ALL TOGETHER */
 	@RequestMapping(value = "users/find-sorted-paged", method = RequestMethod.GET)
-	public Page<User> findSortedPaged(@RequestParam(required = false, defaultValue = "0", name = "page") Integer page,
+	public Page<User> findSortedPaged(
+			@RequestParam(required = false, defaultValue = "0", name = "page") Integer page,
 			@RequestParam(required = false, defaultValue = "5", name = "size") Integer size,
-			@RequestParam(required = false, defaultValue = "", name = "firstName") String firstName,
-			@RequestParam(required = false, defaultValue = "", name = "lastName") String lastName,
-			@RequestParam(required = false, defaultValue = "", name = "email") String email,
-			@RequestParam(required = false, defaultValue = "", name = "roleName") String roleName) {
-		return userService.putAllTogether(firstName, lastName, email, roleName);
+			@RequestParam(required = false, defaultValue = "", name = "fFirstName") String fFirstName,
+			@RequestParam(required = false, defaultValue = "", name = "fLastName") String fLastName,
+			@RequestParam(required = false, defaultValue = "", name = "fEmail") String fEmail,
+			@RequestParam(required = false, defaultValue = "", name = "fRoleName") String fRoleName,
+			@RequestParam(required = false, defaultValue = "", name = "sFirstName") String sFirstName,
+			@RequestParam(required = false, defaultValue = "", name = "sLastName") String sLastName,
+			@RequestParam(required = false, defaultValue = "", name = "sEmail") String sEmail
+			) {
+		return userService.putAllTogether(fFirstName, fLastName, fEmail, fRoleName, sFirstName, sLastName, sEmail, page, size);
 	}
 	
 	

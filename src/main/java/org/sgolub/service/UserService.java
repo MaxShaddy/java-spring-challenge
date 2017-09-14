@@ -142,18 +142,18 @@ public class UserService {
 		
 	}
 	
-
-	
-	
-	public Page<User> putAllTogether(String firstName, String  lastName,String  email, String roleName){
+	public Page<User> putAllTogether(String fFirstName, String fLastName, String fEmail, String fRoleName, 
+									 String sFirstName, String sLastName, String sEmail, Integer pageNr, Integer pageSize ){
 		
-		final Specification<User> spec = UserSpecifications.getAndSpecification( firstName ,lastName, email, roleName);
-		final PageRequest pageRequest = new PageRequest(
-				  0, 20, new Sort(
-				    new Order(Direction.ASC, "lastName"), 
-				    new Order(Direction.DESC, "firstName")
-				  )
-				);
+		final Specification<User> spec = UserSpecifications.getAndSpecification( fFirstName ,fLastName, fEmail, fRoleName);
+		final Sort sort = buildUserSort(sFirstName, sLastName, sEmail);
+		
+		Pageable pageRequest;
+		if (sort != null) {
+			pageRequest = new PageRequest( pageNr, pageSize , sort);
+		} else {
+			pageRequest = new PageRequest( pageNr, pageSize , Direction.ASC, new String [] {"id"});
+		}
 		
 		return userRepository.findAll(spec, pageRequest);
 	}
