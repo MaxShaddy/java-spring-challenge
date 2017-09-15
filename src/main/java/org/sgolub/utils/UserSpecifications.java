@@ -12,7 +12,9 @@ import org.springframework.data.jpa.domain.Specification;
 
 public class UserSpecifications {
 	
-	
+	/**
+	 * Builds Criteria Specification using parameters provided. 
+	 *  */
 	public static Specification<User> getAndSpecification(String firstName, String lastName, String  email, String roleName){
 		return new Specification<User>() {
 		@Override

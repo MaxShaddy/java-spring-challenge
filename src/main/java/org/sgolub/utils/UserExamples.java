@@ -7,6 +7,9 @@ import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 
 public class UserExamples {
 	
+	/** 
+	 * Builds filtering using Example and ExampleMatcher example 
+	 * */
 	public static Example<User> buildAndExample(String firstName, String  lastName,String  email){
 		
 		ExampleMatcher matcher = ExampleMatcher.matching()
